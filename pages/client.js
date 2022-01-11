@@ -1,22 +1,57 @@
-import Layout from '../components/layout'
+import Layout from "../components/layout";
+import { signIn, signOut, useSession } from "next-auth/react";
+import styles from "../components/header.module.css";
 
-export default function Page () {
+
+export default function Page() {
+  const { data: session, status } = useSession();
+  
+
   return (
     <Layout>
-      <h1>Client Side Rendering</h1>
-      <p>
-        This page uses the <strong>useSession()</strong> React Hook in the <strong>&lt;Header/&gt;</strong> component.
-      </p>
-      <p>
-        The <strong>useSession()</strong> React Hook is easy to use and allows pages to render very quickly.
-      </p>
-      <p>
-        The advantage of this approach is that session state is shared between pages by using the <strong>Provider</strong> in <strong>_app.js</strong> so
-        that navigation between pages using <strong>useSession()</strong> is very fast.
-      </p>
-      <p>
-        The disadvantage of <strong>useSession()</strong> is that it requires client side JavaScript.
-      </p>
+      <h1>Your Client profile</h1>
+      {!session && (
+        <>
+          <span>
+            You are not signed in, can you signed with Google, Facebook or
+            GitHub.
+          </span>
+          <a
+            href={`/api/auth/signin`}
+            onClick={(e) => {
+              e.preventDefault();
+              signIn();
+            }}
+          >
+            Sign in
+          </a>
+        </>
+      )}
+      {session && (
+        <>
+          {session.user.image && (
+            <span style={{ backgroundImage: `url('${session.user.image}')` }} />
+          )}
+          <span>
+            <br /><h2>Your email:</h2>
+            <p>{session.user.email}</p>
+            <h2>Your name:</h2>
+            <p>{session.user.name}</p>
+            <span style={{ backgroundImage: `url('${session.user.image}')` }}className={styles.avatar2} />
+            <h2>Token time validation</h2>
+            <p>{session.expires}</p>
+          </span>
+          <a
+            href={`/api/auth/signout`}
+            onClick={(e) => {
+              e.preventDefault();
+              signOut();
+            }}
+          >
+            Sign out
+          </a>
+        </>
+      )}
     </Layout>
-  )
+  );
 }

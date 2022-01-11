@@ -2,20 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 @layer components {
+  .navegador{
+    @apply py-8 px-4 bg-indigo-100 border border-indigo-500 shadow-lg flex;
 }
-html,
-body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-* {
-  box-sizing: border-box;
 }

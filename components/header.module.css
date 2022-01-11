@@ -51,6 +51,19 @@
   background-size: cover;
   background-repeat: no-repeat;
 }
+.avatar2 {
+  border-radius: 2rem;
+  float: left;
+  height: 6.8rem;
+  width: 6.8rem;
+  background-color: white;
+  background-size: cover;
+  background-repeat: no-repeat;
+  float: right;
+  /* top: 2rem; */
+  padding: 4rem;
+  margin: -274px auto;
+}
 
 .button,
 .buttonPrimary {
